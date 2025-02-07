@@ -3,7 +3,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    restart: unless-stopped
+    restart: no # Prevent auto-restart on crash
+    stdin_open: true # Keep stdin open for interaction
+    tty: true # Allocate a pseudo-TTY
     ports:
       - "127.0.0.1:${API_PORT}:${API_PORT}"
     environment:
@@ -12,3 +14,9 @@ services:
       API_PORT: ${API_PORT}
     volumes:
       - ./src:/app/src
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
