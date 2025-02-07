@@ -28,6 +28,9 @@ COPY --link requirements.txt .
 # Install the requirements using uv
 RUN pip install -r requirements.txt
 
+# Add /app/src to PATH
+ENV PATH="/app/src:$PATH"
+
 # Switch to non-root user
 USER appuser
 
