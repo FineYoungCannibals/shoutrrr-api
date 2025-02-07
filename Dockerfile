@@ -33,4 +33,6 @@ USER appuser
 
 WORKDIR /app/src
 
-CMD ["python", "-m", "uvicorn", "app:app", "--host", "0.0.0.0", "--port", $API_PORT]
+ENV API_PORT=${API_PORT}
+
+CMD ["python", "-m", "uvicorn", "app:app", "--host", "0.0.0.0", "--port", "${API_PORT}"]
