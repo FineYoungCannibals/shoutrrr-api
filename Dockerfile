@@ -33,4 +33,4 @@ USER appuser
 
 WORKDIR /app/src
 
-CMD ["sh", "-c", "uvicorn app:app --host 0.0.0.0 --port $API_PORT"]
+CMD ["uvicorn app:app --host 0.0.0.0 --port $API_PORT"]
