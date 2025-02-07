@@ -10,11 +10,9 @@ services:
       SLACK_BOT_TOKEN: ${SLACK_BOT_TOKEN}
       API_KEY: ${API_KEY}
       API_PORT: ${API_PORT}
-    volumes:
-      - ./src:/app/src
     networks:
       - lab
-    command: /bin/sh
+    command: sh -c 'uvicorn --app-dir /app/src app:app --host 0.0.0.0 --port ${API_PORT}'
 
 networks:
   lab:
