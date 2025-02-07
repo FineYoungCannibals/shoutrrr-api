@@ -1,0 +1,20 @@
+services:
+  shoutrrr:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${API_PORT}:${API_PORT}"
+    environment:
+      SLACK_BOT_TOKEN: ${SLACK_BOT_TOKEN}
+      API_KEY: ${API_KEY}
+      API_PORT: ${API_PORT}
+    volumes:
+      - ./src:/app/src
+    networks:
+      - lab
+
+networks:
+  lab:
+    external: true
