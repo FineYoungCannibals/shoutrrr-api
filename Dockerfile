@@ -3,6 +3,9 @@ FROM python:3.13.2-alpine
 # Set the working directory
 WORKDIR /app
 
+# Copy the Python app
+COPY src/ /app/src
+
 # Create a non-root user and group
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
@@ -25,12 +28,9 @@ COPY --link requirements.txt .
 # Install the requirements using uv
 RUN pip install -r requirements.txt
 
-
 # Switch to non-root user
 USER appuser
 
-# Copy the Python app
-COPY src/ /app/src
 WORKDIR /app/src
 
 CMD ["sh", "-c", "uvicorn app:app --host 0.0.0.0 --port $API_PORT"]
