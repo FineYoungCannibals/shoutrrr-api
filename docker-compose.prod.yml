@@ -1,19 +1,19 @@
 services:
   shoutrrr:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    restart: unless-stopped
+    image: ghcr.io/fineyoungcannibals/shoutrrr:latest
     ports:
-      - "127.0.0.1:${API_PORT}:${API_PORT}"
+      - "${API_PORT}:${API_PORT}"
+    deploy:
+      restart_policy:
+        condition: any
     environment:
       SLACK_BOT_TOKEN: ${SLACK_BOT_TOKEN}
       API_KEY: ${API_KEY}
       API_PORT: ${API_PORT}
     networks:
-      - lab
+      - lab_swarm
     command: sh -c 'uvicorn --app-dir /app/src app:app --host 0.0.0.0 --port ${API_PORT}'
 
 networks:
-  lab:
+  lab_swarm:
     external: true
