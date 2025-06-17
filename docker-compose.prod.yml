@@ -1,6 +1,6 @@
 services:
   shoutrrr:
-    image: ghcr.io/fineyoungcannibals/shoutrrr:latest
+    image: ghcr.io/fineyoungcannibals/shoutrrr-api:latest
     ports:
       - "${API_PORT}:${API_PORT}"
     deploy:
